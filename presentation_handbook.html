@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Git & GitHub Fundamentals — Complete Presentation Handbook (Member 1)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 16mm 14mm 18mm 14mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #ffffff;
+      color: #1e293b;
+      font-size: 9.8pt;
+      line-height: 1.5;
+    }
+
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    .no-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* COVER PAGE */
+    .cover-container {
+      height: 100%;
+      min-height: 250mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24mm 16mm;
+      border: 3px solid #0284c7;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #070b14 0%, #0f172a 50%, #1e1b4b 100%);
+      color: #f8fafc;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.2);
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 11pt;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      align-self: flex-start;
+    }
+
+    .cover-hero {
+      margin-top: 20mm;
+      margin-bottom: 20mm;
+    }
+
+    .cover-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 34pt;
+      font-weight: 900;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 8mm;
+      letter-spacing: -0.5px;
+    }
+
+    .cover-title span {
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-subtitle {
+      font-size: 15pt;
+      font-weight: 600;
+      color: #94a3b8;
+      line-height: 1.4;
+      margin-bottom: 12mm;
+    }
+
+    .cover-features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 6mm;
+    }
+
+    .cover-feature-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+
+    .cover-feature-box h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 3px;
+    }
+
+    .cover-feature-box p {
+      font-size: 8.8pt;
+      color: #cbd5e1;
+      line-height: 1.35;
+    }
+
+    .cover-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 8mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .cover-meta h5 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-bottom: 2px;
+    }
+
+    .cover-meta p {
+      font-size: 9pt;
+      color: #94a3b8;
+    }
+
+    .cover-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      color: #94a3b8;
+      text-align: right;
+    }
+
+    /* HEADER & FOOTER ON CONTENT PAGES */
+    .section-header {
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .section-header-left h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17pt;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .section-header-left p {
+      font-size: 9.5pt;
+      color: #0284c7;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .slide-badge-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #e0f2fe;
+      border: 1px solid #7dd3fc;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      font-weight: 700;
+      color: #0369a1;
+      text-transform: uppercase;
+    }
+
+    /* CARDS & CONTAINERS */
+    .card-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .card-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .info-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .info-card.danger {
+      background: #fff1f2;
+      border-color: #fecdd3;
+    }
+
+    .info-card.danger h4 {
+      color: #be123c;
+    }
+
+    .info-card.success {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .info-card.success h4 {
+      color: #15803d;
+    }
+
+    .info-card.accent {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+    }
+
+    .info-card.accent h4 {
+      color: #0369a1;
+    }
+
+    .info-card.warning {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .info-card.warning h4 {
+      color: #b45309;
+    }
+
+    .info-card h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10pt;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .info-card p {
+      font-size: 8.8pt;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    /* CODE BLOCKS */
+    .terminal-box {
+      background: #090e1a;
+      border-radius: 10px;
+      border: 1px solid #1e293b;
+      margin: 12px 0;
+      overflow: hidden;
+    }
+
+    .terminal-titlebar {
+      background: #0f172a;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #eab308; }
+    .dot-green { background: #22c55e; }
+
+    .terminal-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      color: #94a3b8;
+    }
+
+    .terminal-body {
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      line-height: 1.45;
+      color: #38bdf8;
+      white-space: pre-wrap;
+    }
+
+    .terminal-body .comment {
+      color: #64748b;
+    }
+
+    /* COMMAND SYNTAX TABLE */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px 0;
+      font-size: 8.8pt;
+    }
+
+    table.data-table th {
+      background: #f1f5f9;
+      color: #0f172a;
+      text-align: left;
+      padding: 8px 10px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      border-bottom: 2px solid #cbd5e1;
+    }
+
+    table.data-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    table.data-table tr:nth-child(even) td {
+      background: #fafafa;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.4pt;
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #0284c7;
+      border: 1px solid #e2e8f0;
+    }
+
+    .terminal-box code {
+      background: transparent;
+      border: none;
+      color: inherit;
+    }
+
+    /* PRO TIPS & HIGHLIGHT CALLOUTS */
+    .pro-tip-banner {
+      background: linear-gradient(90deg, #fef3c7, #ffedd5);
+      border-left: 4px solid #f59e0b;
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 10px 0 14px 0;
+    }
+
+    .pro-tip-banner strong {
+      color: #92400e;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .pro-tip-banner p {
+      font-size: 8.8pt;
+      color: #78350f;
+      margin-top: 2px;
+    }
+
+    .handoff-banner {
+      background: linear-gradient(135deg, #fef08a 0%, #fdba74 50%, #f472b6 100%);
+      border: 2px solid #ea580c;
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin: 12px 0;
+    }
+
+    .handoff-banner h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13pt;
+      font-weight: 900;
+      color: #7c2d12;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .handoff-banner p {
+      font-size: 9pt;
+      color: #7c2d12;
+      font-weight: 500;
+    }
+
+    /* POP QUIZ CARDS */
+    .quiz-card {
+      background: #faf5ff;
+      border: 1px solid #e9d5ff;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+    }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .quiz-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 8pt;
+      background: #f3e8ff;
+      color: #7e22ce;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #d8b4fe;
+    }
+
+    .quiz-topic {
+      font-size: 8pt;
+      font-weight: 600;
+      color: #6b21a8;
+    }
+
+    .quiz-question {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 10.5pt;
+      color: #1e1b4b;
+      margin-bottom: 8px;
+    }
+
+    .quiz-options-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .quiz-opt {
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 8.5pt;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #334155;
+    }
+
+    .quiz-opt.correct {
+      border-color: #22c55e;
+      background: #f0fdf4;
+      color: #15803d;
+      font-weight: 700;
+    }
+
+    .quiz-explanation {
+      background: #ffffff;
+      border-left: 3px solid #7e22ce;
+      padding: 6px 10px;
+      font-size: 8.5pt;
+      color: #4b5563;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* VOCABULARY DETAIL BOX */
+    .vocab-item {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .vocab-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .vocab-name {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 11pt;
+      color: #0f172a;
+    }
+
+    .vocab-tag {
+      font-size: 7.8pt;
+      font-weight: 700;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .vocab-desc {
+      font-size: 8.5pt;
+      color: #475569;
+      line-height: 1.35;
+    }
+
+    .vocab-tip {
+      font-size: 7.8pt;
+      color: #0369a1;
+      background: #f0f9ff;
+      padding: 4px 6px;
+      border-radius: 4px;
+      border-top: 1px dashed #bae6fd;
+    }
+
+    /* Q&A ITEMS */
+    .qa-box {
+      margin-bottom: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .qa-q {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 9.8pt;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .qa-a {
+      font-size: 8.8pt;
+      color: #475569;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= COVER PAGE ================= -->
+  <div class="cover-container">
+    <div>
+      <div class="cover-badge">🚀 Member 1 Visual Presentation Master Handbook</div>
+      <div class="cover-hero">
+        <h1 class="cover-title">Git &amp; GitHub<br><span>Fundamentals</span></h1>
+        <p class="cover-subtitle">The Complete Analogy-Driven, Visual &amp; Practical Field Guide for Student Developers</p>
+
+        <div class="cover-features-grid">
+          <div class="cover-feature-box">
+            <h4>💡 Intuitive Mental Models</h4>
+            <p>Video game checkpoints, photographic cameras vs. Instagram, and unversioned file chaos.</p>
+          </div>
+          <div class="cover-feature-box">
+            <h4>⚙️ Local Git Architecture</h4>
+            <p>Working directory, staging blueprint, commit snapshots, and 100% offline time-travel.</p>
+          </div>
+          <div class="cover-feature-box">
+            <h4>☁️ GitHub Cloud Ecosystem</h4>
+            <p>Cloud backups, GitHub Student Pack ($200k+ free tools), PR workflows, and developer portfolios.</p>
+          </div>
+          <div class="cover-feature-box">
+            <h4>🎯 Complete Knowledge Bank</h4>
+            <p>8 Essential power words, command tables, 6 Pop Quiz Arena solutions, and audience Q&amp;A cheat sheet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <div class="cover-meta">
+        <h5>Presented by Member 1</h5>
+        <p>Topic: Git &amp; GitHub Fundamentals &bull; Foundations Module</p>
+      </div>
+      <div class="cover-date">
+        Git Set Code &bull; 3D Deck Companion<br>
+        Published September 2026
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TABLE OF CONTENTS ================= -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2>Table of Contents</h2>
+      <p>Executive Overview of All 7 Presentation Modules</p>
+    </div>
+    <span class="slide-badge-pill">Overview</span>
+  </div>
+
+  <table class="data-table" style="margin-top: 15px; font-size: 9.5pt;">
+    <thead>
+      <tr>
+        <th style="width: 15%;">Chapter</th>
+        <th style="width: 35%;">Title</th>
+        <th style="width: 50%;">Core Student Takeaway &amp; Key Concept</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Chapter 1</strong></td>
+        <td><strong>Why Do We Need Git?</strong></td>
+        <td>The 4 Catastrophes of unversioned code (<code>final_v99.py</code>) and the Checkpoint Analogy.</td>
+      </tr>
+      <tr>
+        <td><strong>Chapter 2</strong></td>
+        <td><strong>What is Git? (Local Engine)</strong></td>
+        <td>Distributed version control, 3 superpowers, and the 3 States of Git (Working, Staging, Commit).</td>
+      </tr>
+      <tr>
+        <td><strong>Chapter 3</strong></td>
+        <td><strong>What is GitHub? (Cloud Hub)</strong></td>
+        <td>Cloud collaboration, open-source networking, student developer pack, and cloud backup.</td>
+      </tr>
+      <tr>
+        <td><strong>Chapter 4</strong></td>
+        <td><strong>Git vs. GitHub Comparison</strong></td>
+        <td>Camera vs. Instagram, definitive comparison matrix, and 4 unforgettable mental models.</td>
+      </tr>
+      <tr>
+        <td><strong>Chapter 5</strong></td>
+        <td><strong>8 Essential Vocabulary Words</strong></td>
+        <td>Repo, Commit, Push, Pull, Clone, Branch, Fork, and PR with exact syntax and pro tips.</td>
+      </tr>
+      <tr>
+        <td><strong>Chapter 6</strong></td>
+        <td><strong>Passing the Torch! (Handoff)</strong></td>
+        <td>Member 1's 4 Golden Rules, global Git configuration setup, and preview of Member 2's live terminal demo.</td>
+      </tr>
+      <tr>
+        <td><strong>Chapter 7</strong></td>
+        <td><strong>Grand Pop Quiz Arena</strong></td>
+        <td>Complete 6-topic knowledge challenge questions, multiple-choice options, answers, and deep explanations.</td>
+      </tr>
+      <tr>
+        <td><strong>Appendix</strong></td>
+        <td><strong>Audience Q&amp;A Cheat Sheet</strong></td>
+        <td>6 most common student questions: secret keys, merge conflicts, fetch vs. pull, and career best practices.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= CHAPTER 1 ================= -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2>Chapter 1: Why Do We Need Git &amp; GitHub?</h2>
+      <p>The Universal Struggle Every Developer Faces &bull; Hook &amp; Problem Statement</p>
+    </div>
+    <span class="slide-badge-pill">Slide 1 of 7</span>
+  </div>
+
+  <div class="pro-tip-banner">
+    <strong>🤔 The Hook Question:</strong> Have you ever saved a project like this?
+    <p><code>final_v1.py</code> &bull; <code>final_v2_really_final.py</code> &bull; <code>final_v3_fixed_omg.py</code> &bull; <code>project_final_final_submission_FINAL.py</code></p>
+  </div>
+
+  <h3 style="font-family:'Outfit', sans-serif; font-size:12pt; margin-bottom:8px; color:#0f172a;">💥 The 4 Catastrophes of Unversioned Code</h3>
+  <div class="card-grid-2">
+    
+      <div class="info-card danger no-break">
+        <h4>🧠 The "Which One Worked?" Amnesia</h4>
+        <p>Was `final_v2.py` the one with working login, or was that `final_REAL.py`? Nobody remembers 48 hours later.</p>
+      </div>
+    
+      <div class="info-card danger no-break">
+        <h4>💥 The Group Partner Collision</h4>
+        <p>Teammates emailing zip files over WhatsApp or Discord. Partner A overwrites Partner B's 500 lines without knowing.</p>
+      </div>
+    
+      <div class="info-card danger no-break">
+        <h4>☕ The Hardware &amp; Coffee Disaster</h4>
+        <p>A spilled drink or crashed SSD the night before submission means your entire semester project vanishes into thin air.</p>
+      </div>
+    
+      <div class="info-card danger no-break">
+        <h4>🕵️ The "It Worked Yesterday" Mystery</h4>
+        <p>Your code broke at 3:00 AM. You have no idea which line changed or who touched it because there is zero history.</p>
+      </div>
+    
+  </div>
+
+  <div class="info-card accent no-break" style="margin-bottom: 12px;">
+    <h4>🎮 The Game Checkpoint Analogy</h4>
+    <p>Imagine playing an 80-hour RPG where you can only have <em>one single save slot</em> that constantly overwrites itself. If you fall off a cliff or hit a bug, your entire character is wiped out forever. <strong>Git is your unlimited save-point system</strong>: make a checkpoint before entering any dungeon (branching), and rewind back in time instantly if your code breaks.</p>
+  </div>
+
+  <div class="terminal-box no-break">
+    <div class="terminal-titlebar">
+      <div class="terminal-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+      <span class="terminal-title">Terminal &bull; First-Time Initialization</span>
+    </div>
+    <div class="terminal-body"><span class="comment"># Navigate to your chaotic project directory and take control:</span>
+$ cd my-student-project
+$ git init
+$ git status</div>
+  </div>
+
+  <div class="pro-tip-banner no-break">
+    <strong>🌟 Member 1 Golden Rule:</strong> Treat your codebase like a professional time-lapse. Never make duplicate "backup" folders on your desktop!
+    <p><strong>🔥 Student War Story:</strong> Hackathon 2024: A team emailed a zip file at 11:58 PM. The submission form closed while it was uploading. With Git + GitHub, one `git push` takes 1.2 seconds.</p>
+  </div>
+
+  <!-- ================= CHAPTER 2 ================= -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2>Chapter 2: What is Git?</h2>
+      <p>The Local Engine &bull; Distributed Version Control System (DVCS)</p>
+    </div>
+    <span class="slide-badge-pill">Slide 2 of 7</span>
+  </div>
+
+  <div class="info-card accent no-break" style="margin-bottom: 12px;">
+    <h4>📖 Official Definition</h4>
+    <p>Git is a free, open-source Distributed Version Control System (DVCS) installed directly on your local computer. It tracks every single character modification across your entire codebase over time.</p>
+  </div>
+
+  <h3 style="font-family:'Outfit', sans-serif; font-size:12pt; margin-bottom:8px; color:#0f172a;">⚡ The 3 Superpowers of Local Git</h3>
+  <div class="card-grid-3">
+    
+      <div class="info-card success no-break">
+        <h4>⏱️ Pixel-Perfect Change Tracking</h4>
+        <p>Git records who made changes, exactly which lines were added or deleted, and when. You never have to guess what broke your build.</p>
+      </div>
+    
+      <div class="info-card success no-break">
+        <h4>🧪 Fearless Experimentation</h4>
+        <p>Create an isolated parallel branch to test a crazy new algorithm or library. If it fails, delete the branch with zero impact on your working code.</p>
+      </div>
+    
+      <div class="info-card success no-break">
+        <h4>⏳ Instant Time Travel (True Undo)</h4>
+        <p>Made a catastrophic mistake? Git lets you revert a single file or your entire repository back to any previous commit in milliseconds.</p>
+      </div>
+    
+  </div>
+
+  <h3 style="font-family:'Outfit', sans-serif; font-size:12pt; margin-bottom:8px; color:#0f172a;">⚙️ The 3 States of Git (Under the Hood)</h3>
+  <div class="card-grid-3">
+    
+      <div class="info-card no-break">
+        <span class="slide-badge-pill" style="font-size:7pt; margin-bottom:4px;">Local Workspace</span>
+        <h4>1. Working Directory</h4>
+        <p style="margin: 4px 0;"><code>Untracked / Modified</code></p>
+        <p>Your actual project files where you write code, edit CSS, and test in your browser.</p>
+      </div>
+    
+      <div class="info-card no-break">
+        <span class="slide-badge-pill" style="font-size:7pt; margin-bottom:4px;">Photo Lineup</span>
+        <h4>2. Staging Area (Index)</h4>
+        <p style="margin: 4px 0;"><code>git add <file></code></p>
+        <p>The preparation stage. Like lining up people for a group photograph before taking the snapshot.</p>
+      </div>
+    
+      <div class="info-card no-break">
+        <span class="slide-badge-pill" style="font-size:7pt; margin-bottom:4px;">Permanent Vault</span>
+        <h4>3. Local Git Repository</h4>
+        <p style="margin: 4px 0;"><code>git commit -m "..."</code></p>
+        <p>The permanent record. The snapshot is stamped into the `.git` database with a cryptographic SHA hash.</p>
+      </div>
+    
+  </div>
+
+  <div class="terminal-box no-break">
+    <div class="terminal-titlebar">
+      <div class="terminal-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+      <span class="terminal-title">Terminal &bull; Real Lifecycle Sequence</span>
+    </div>
+    <div class="terminal-body"># 1. Initialize a new local Git repository
+$ git init
+Initialized empty Git repository in /workspace/my-app/.git/
+
+# 2. Check repository status
+$ git status
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+        index.html
+        app.js
+
+# 3. Stage changes for the snapshot
+$ git add .
+
+# 4. Save permanent snapshot with a clear message
+$ git commit -m "feat: setup initial navbar and responsive grid layout"
+[main (root-commit) 4e82b19] feat: setup initial navbar and responsive grid layout
+ 2 files changed, 142 insertions(+)</div>
+  </div>
+
+  <table class="data-table no-break">
+    <thead>
+      <tr>
+        <th style="width: 35%;">Command Syntax</th>
+        <th style="width: 65%;">Action &amp; Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td><code>git init</code></td>
+          <td>Creates the hidden `.git` folder that holds your local repository database.</td>
+        </tr>
+      
+        <tr>
+          <td><code>git status</code></td>
+          <td>Shows modified files, staged files, and untracked files in your working directory.</td>
+        </tr>
+      
+        <tr>
+          <td><code>git add .</code></td>
+          <td>Stages all new and modified files into the preparation index for the next commit.</td>
+        </tr>
+      
+        <tr>
+          <td><code>git commit -m "msg"</code></td>
+          <td>Permanently records the staged changes as a new commit node in history.</td>
+        </tr>
+      
+        <tr>
+          <td><code>git restore &lt;file&gt;</code></td>
+          <td>Discards local changes in working directory, reverting back to the last commit.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+
+  <!-- ================= CHAPTER 3 ================= -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2>Chapter 3: What is GitHub?</h2>
+      <p>The Cloud Collaboration Hub &bull; Where Developers Build Together</p>
+    </div>
+    <span class="slide-badge-pill">Slide 3 of 7</span>
+  </div>
+
+  <div class="info-card accent no-break" style="margin-bottom: 12px;">
+    <h4>📖 Official Definition</h4>
+    <p>GitHub is a cloud-based hosting platform built for software developers. It hosts your remote Git repositories online, providing team collaboration tools, issue tracking, automated CI/CD pipelines, and your public engineering portfolio.</p>
+  </div>
+
+  <h3 style="font-family:'Outfit', sans-serif; font-size:12pt; margin-bottom:8px; color:#0f172a;">🌟 Why GitHub is Vital for Student Developers</h3>
+  <div class="card-grid-2">
+    
+      <div class="info-card no-break">
+        <h4>🛡️ Unbreakable Cloud Backup</h4>
+        <p>Your code is securely stored across worldwide data centers. Stolen laptop, broken SSD, or coffee spill? Run `git clone` on any machine and resume working in 60 seconds.</p>
+      </div>
+    
+      <div class="info-card no-break">
+        <h4>🤝 Frictionless Team Collaboration</h4>
+        <p>Multiple developers work simultaneously on different branches. GitHub handles Pull Requests, inline code review discussions, and merges without stepping on toes.</p>
+      </div>
+    
+      <div class="info-card no-break">
+        <h4>💼 Your Living Developer Resume</h4>
+        <p>Tech recruiters value a link to your GitHub profile more than an inflated resume. It shows real proof that you write clean code, write documentation, and contribute.</p>
+      </div>
+    
+      <div class="info-card no-break">
+        <h4>🚀 Free Hosting with GitHub Pages</h4>
+        <p>You can host your portfolio websites, documentation, and web apps directly from a repository for free under `&lt;username&gt;.github.io`.</p>
+      </div>
+    
+  </div>
+
+  <div class="pro-tip-banner no-break">
+    <strong>🎁 🎓 The GitHub Student Developer Pack:</strong>
+    <p>As a verified student, you get free GitHub Copilot (AI pair programmer), free domains, cloud credits on Azure &amp; DigitalOcean, and premium developer tools valued at over $200,000!</p>
+  </div>
+
+  <div class="terminal-box no-break">
+    <div class="terminal-titlebar">
+      <div class="terminal-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+      <span class="terminal-title">Terminal &bull; Linking Local Git to GitHub Cloud</span>
+    </div>
+    <div class="terminal-body"># 1. Link your local repository to your remote GitHub repository URL
+$ git remote add origin https://github.com/student-dev/cool-project.git
+
+# 2. Rename your default branch to 'main'
+$ git branch -M main
+
+# 3. Push your local commits up to GitHub (with upstream tracking)
+$ git push -u origin main
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (15/15), 4.2 KiB | 2.1 MiB/s, done.
+To https://github.com/student-dev/cool-project.git
+ * [new branch]      main -&gt; main
+Branch 'main' set up to track remote branch 'main' from 'origin'.</div>
+  </div>
+
+  <!-- ================= CHAPTER 4 ================= -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2>Chapter 4: Git vs. GitHub</h2>
+      <p>The Definitive Comparison &amp; Mental Models</p>
+    </div>
+    <span class="slide-badge-pill">Slide 4 of 7</span>
+  </div>
+
+  <div class="pro-tip-banner">
+    <strong>💡 The Core Insight:</strong> It is easy for beginners to confuse them, but just remember this simple comparison matrix &amp; mental models:
+  </div>
+
+  <h3 style="font-family:'Outfit', sans-serif; font-size:12pt; margin-bottom:8px; color:#0f172a;">📊 Technical Comparison Matrix</h3>
+  <table class="data-table no-break">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Dimension</th>
+        <th style="width: 35%;">Git (Local Engine 📷)</th>
+        <th style="width: 40%;">GitHub (Cloud Social 📸)</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td><strong>Where it runs</strong></td>
+          <td>Locally on your computer / laptop</td>
+          <td>On cloud servers in the cloud (web)</td>
+        </tr>
+      
+        <tr>
+          <td><strong>Internet needed?</strong></td>
+          <td>No. 100% offline functionality</td>
+          <td>Yes. Requires internet connection</td>
+        </tr>
+      
+        <tr>
+          <td><strong>Interface</strong></td>
+          <td>Command Line (CLI) &amp; terminal / IDE plugins</td>
+          <td>Sleek web browser interface &amp; API</td>
+        </tr>
+      
+        <tr>
+          <td><strong>Primary purpose</strong></td>
+          <td>Track file changes, diffs &amp; timeline snapshots</td>
+          <td>Team sharing, cloud backup &amp; code reviews</td>
+        </tr>
+      
+        <tr>
+          <td><strong>Created by</strong></td>
+          <td>Linus Torvalds (creator of Linux, 2005)</td>
+          <td>Founded in 2008 (acquired by Microsoft 2018)</td>
+        </tr>
+      
+    </tbody>
+  </table>
+
+  <h3 style="font-family:'Outfit', sans-serif; font-size:12pt; margin-top:14px; margin-bottom:8px; color:#0f172a;">💡 4 Unforgettable Mental Models</h3>
+  <div class="card-grid-2">
+    
+      <div class="info-card no-break">
+        <h4>The Camera vs. Instagram</h4>
+        <p><strong>Git:</strong> 📷 The Camera: Takes photos locally on your SD card.</p>
+        <p style="margin-top:4px;"><strong>GitHub:</strong> 📸 Instagram: The social platform where you upload and share the photos.</p>
+      </div>
+    
+      <div class="info-card no-break">
+        <h4>Single-Player Save vs. Multiplayer Lobby</h4>
+        <p><strong>Git:</strong> 💾 Offline Save Slot: Saves your progress on your local hard drive.</p>
+        <p style="margin-top:4px;"><strong>GitHub:</strong> 🌐 Multiplayer Server: Cloud lobby where you team up with friends.</p>
+      </div>
+    
+      <div class="info-card no-break">
+        <h4>Kitchen Cooking vs. Restaurant Dining</h4>
+        <p><strong>Git:</strong> 🍳 The Kitchen: Where you chop vegetables and prepare the recipe.</p>
+        <p style="margin-top:4px;"><strong>GitHub:</strong> 🍽️ The Restaurant: Where you plate the dish and serve it to customers.</p>
+      </div>
+    
+      <div class="info-card no-break">
+        <h4>Private Journal vs. Public Library</h4>
+        <p><strong>Git:</strong> 📝 Personal Notebook: You jot down your private thoughts and notes.</p>
+        <p style="margin-top:4px;"><strong>GitHub:</strong> 📚 Public Library: Where books are published for the world to discover.</p>
+      </div>
+    
+  </div>
+
+  <!-- ================= CHAPTER 5 ================= -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2>Chapter 5: Essential Vocabulary</h2>
+      <p>The 8 Industry Power Words Every Developer Must Know</p>
+    </div>
+    <span class="slide-badge-pill">Slide 5 of 7</span>
+  </div>
+
+  <div class="pro-tip-banner">
+    <strong>🔄 The 3-Phase Teamwork Lifecycle:</strong>
+    &bull; <strong>Phase A: Project Setup</strong> (Clone or Fork): Get the code onto your local machine with full history. &bull; <strong>Phase B: Daily Feature Work</strong> (Branch ➡️ Add ➡️ Commit): Isolate your feature, stage atomic changes, and create checkpoints. &bull; <strong>Phase C: Collaboration & Release</strong> (Pull ➡️ Push ➡️ Pull Request): Stay in sync with teammates and submit code for peer review. 
+  </div>
+
+  <h3 style="font-family:'Outfit', sans-serif; font-size:12pt; margin-bottom:8px; color:#0f172a;">📚 The 8 Power Words Reference</h3>
+  <div class="card-grid-2">
+    
+      <div class="vocab-item no-break">
+        <div class="vocab-item-top">
+          <span class="vocab-name">Repository (Repo)</span>
+          <span class="vocab-tag">The Vault</span>
+        </div>
+        <p class="vocab-desc">Your project folder containing all code files, assets, and full cryptographic revision history.</p>
+        <div><code>git init</code></div>
+        <div class="vocab-tip">💡 Pro Tip: A repo can be local on your machine or remote on GitHub.</div>
+      </div>
+    
+      <div class="vocab-item no-break">
+        <div class="vocab-item-top">
+          <span class="vocab-name">Commit</span>
+          <span class="vocab-tag">The Snapshot</span>
+        </div>
+        <p class="vocab-desc">A permanent checkpoint of your project at an exact moment, tagged with a unique 40-character SHA hash.</p>
+        <div><code>git commit -m "feat: login form"</code></div>
+        <div class="vocab-tip">💡 Pro Tip: Write commit messages in present imperative tense ("Add feature", not "Added feature").</div>
+      </div>
+    
+      <div class="vocab-item no-break">
+        <div class="vocab-item-top">
+          <span class="vocab-name">Push</span>
+          <span class="vocab-tag">The Rocket</span>
+        </div>
+        <p class="vocab-desc">Uploading committed changes from your local repository up to a remote repository on GitHub.</p>
+        <div><code>git push origin main</code></div>
+        <div class="vocab-tip">💡 Pro Tip: Always test that your code compiles before pushing to a shared branch.</div>
+      </div>
+    
+      <div class="vocab-item no-break">
+        <div class="vocab-item-top">
+          <span class="vocab-name">Pull</span>
+          <span class="vocab-tag">The Tractor Beam</span>
+        </div>
+        <p class="vocab-desc">Downloading and integrating new updates from GitHub down into your local working directory.</p>
+        <div><code>git pull origin main</code></div>
+        <div class="vocab-tip">💡 Pro Tip: Run `git pull` every morning before you begin typing code to prevent merge conflicts!</div>
+      </div>
+    
+      <div class="vocab-item no-break">
+        <div class="vocab-item-top">
+          <span class="vocab-name">Clone</span>
+          <span class="vocab-tag">The Duplicator</span>
+        </div>
+        <p class="vocab-desc">Downloading an exact replica of an existing remote repository onto your computer for the first time.</p>
+        <div><code>git clone https://github.com/...</code></div>
+        <div class="vocab-tip">💡 Pro Tip: You only clone ONCE. Afterward, you use `git pull` to fetch updates.</div>
+      </div>
+    
+      <div class="vocab-item no-break">
+        <div class="vocab-item-top">
+          <span class="vocab-name">Branch</span>
+          <span class="vocab-tag">Parallel Universe</span>
+        </div>
+        <p class="vocab-desc">An isolated line of development. Build a feature safely without risking the stability of `main`.</p>
+        <div><code>git checkout -b feature-chat</code></div>
+        <div class="vocab-tip">💡 Pro Tip: Never code directly on the `main` branch in a team project!</div>
+      </div>
+    
+      <div class="vocab-item no-break">
+        <div class="vocab-item-top">
+          <span class="vocab-name">Fork</span>
+          <span class="vocab-tag">The Copycat</span>
+        </div>
+        <p class="vocab-desc">Creating your own personal copy of someone else's GitHub repository under your own account to freely modify.</p>
+        <div><code>Fork via GitHub Web UI</code></div>
+        <div class="vocab-tip">💡 Pro Tip: Open-source contributions always start by forking the original repository.</div>
+      </div>
+    
+      <div class="vocab-item no-break">
+        <div class="vocab-item-top">
+          <span class="vocab-name">Pull Request (PR)</span>
+          <span class="vocab-tag">The Peace Treaty</span>
+        </div>
+        <p class="vocab-desc">A proposal asking repository maintainers to review your branch changes and merge them into the main project.</p>
+        <div><code>Open via GitHub Web UI</code></div>
+        <div class="vocab-tip">💡 Pro Tip: PRs allow teammates to inspect code diffs and leave comments before anything breaks production.</div>
+      </div>
+    
+  </div>
+
+  <!-- ================= CHAPTER 6 ================= -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2>Chapter 6: Passing The Torch! (The Grand Handoff)</h2>
+      <p>Member 1 Master Summary &bull; Member 2 Live Demo Preview</p>
+    </div>
+    <span class="slide-badge-pill">Slide 6 of 7</span>
+  </div>
+
+  <div class="handoff-banner no-break">
+    <h3>🎤 Member 1's Live Presentation Quote</h3>
+    <p>"Now, I'll pass it over to the next member to show you exactly how we use these in action!"</p>
+  </div>
+
+  <h3 style="font-family:'Outfit', sans-serif; font-size:12pt; margin-bottom:8px; color:#0f172a;">👑 Member 1's 4 Golden Rules</h3>
+  <div class="card-grid-2">
+    
+      <div class="info-card accent no-break">
+        <h4>Rule 01: Git is Local, GitHub is Cloud</h4>
+        <p>Git tracks your version history offline on your laptop; GitHub is where you back up, share, and collaborate.</p>
+      </div>
+    
+      <div class="info-card accent no-break">
+        <h4>Rule 02: Commit Early, Commit Often</h4>
+        <p>Save small, atomic commits with clear messages instead of giant monolithic dumps at midnight.</p>
+      </div>
+    
+      <div class="info-card accent no-break">
+        <h4>Rule 03: Branch Before You Break</h4>
+        <p>Keep `main` production-ready. Always develop features and experiments on dedicated feature branches.</p>
+      </div>
+    
+      <div class="info-card accent no-break">
+        <h4>Rule 04: Pull Before You Push</h4>
+        <p>Always fetch your teammates' updates before pushing yours to minimize merge conflict headaches.</p>
+      </div>
+    
+  </div>
+
+  <h3 style="font-family:'Outfit', sans-serif; font-size:12pt; margin-top:12px; margin-bottom:8px; color:#0f172a;">🎯 What Member 2 is About to Show You Live</h3>
+  <div class="info-card success no-break" style="margin-bottom: 12px;">
+    <ul style="padding-left: 18px; font-size: 9pt; color: #15803d; line-height: 1.6;">
+      <li><strong>⚡ Live Terminal Demo: Initializing a repository from scratch</strong></li><li><strong>🌿 Branching in real-time: Switching contexts with zero downtime</strong></li><li><strong>🥊 Resolving a Merge Conflict live on screen without panic</strong></li><li><strong>🚀 Submitting and merging a real Pull Request on GitHub</strong></li>
+    </ul>
+  </div>
+
+  <div class="terminal-box no-break">
+    <div class="terminal-titlebar">
+      <div class="terminal-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+      <span class="terminal-title">Terminal &bull; First-Time Global Git Setup</span>
+    </div>
+    <div class="terminal-body"># One-time global configuration on your computer:
+$ git config --global user.name "Your Name"
+$ git config --global user.email "student@university.edu"
+$ git config --global init.defaultBranch main
+
+# Verify your configuration:
+$ git config --list --show-origin</div>
+  </div>
+
+  <!-- ================= CHAPTER 7 ================= -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2>Chapter 7: Grand Pop Quiz Arena</h2>
+      <p>The Complete 6-Topic Mastery Knowledge Bank &amp; Solutions</p>
+    </div>
+    <span class="slide-badge-pill">Slide 7 of 7</span>
+  </div>
+
+  
+    <div class="quiz-card no-break">
+      <div class="quiz-header">
+        <span class="quiz-badge">Question 1 of 6</span>
+        <span class="quiz-topic">Git &amp; GitHub Fundamentals &bull; Introduction &amp; Hook</span>
+      </div>
+      <div class="quiz-question">Why is keeping multiple zip backups like "project_final_v2.zip" dangerous for teams?</div>
+      <div class="quiz-options-list">
+        
+          <div class="quiz-opt ">
+            <strong>A.</strong> Zip files take up too much RAM on modern laptops
+            
+          </div>
+        
+          <div class="quiz-opt correct">
+            <strong>B.</strong> You cannot tell what changed, and teammates easily overwrite each other's work
+             <em>(Correct ✓)</em>
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>C.</strong> Python and JavaScript compilers refuse to read unzipped files
+            
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>D.</strong> GitHub charges a $5 fee for every zip file on your desktop
+            
+          </div>
+        
+      </div>
+      <div class="quiz-explanation">
+        <strong>💡 Key Conceptual Takeaway:</strong> Zip files are black boxes! You have no line-by-line diff, no attribution of who wrote what, and manual merging is prone to disastrous file overwrites.
+      </div>
+    </div>
+  
+    <div class="quiz-card no-break">
+      <div class="quiz-header">
+        <span class="quiz-badge">Question 2 of 6</span>
+        <span class="quiz-topic">1. What is Git? &bull; Core Tool #1</span>
+      </div>
+      <div class="quiz-question">Do you need an active internet connection to create commits and inspect history with Git?</div>
+      <div class="quiz-options-list">
+        
+          <div class="quiz-opt ">
+            <strong>A.</strong> Yes, Git must ping GitHub servers on every commit
+            
+          </div>
+        
+          <div class="quiz-opt correct">
+            <strong>B.</strong> No, Git runs 100% locally on your computer with zero internet required
+             <em>(Correct ✓)</em>
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>C.</strong> Only if your project contains more than 50 files
+            
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>D.</strong> Yes, because commit hashes are generated by AWS cloud servers
+            
+          </div>
+        
+      </div>
+      <div class="quiz-explanation">
+        <strong>💡 Key Conceptual Takeaway:</strong> Git is 100% distributed and local! The entire history and database live directly inside your local `.git` directory. You can code on a plane or during a campus Wi-Fi outage.
+      </div>
+    </div>
+  
+    <div class="quiz-card no-break">
+      <div class="quiz-header">
+        <span class="quiz-badge">Question 3 of 6</span>
+        <span class="quiz-topic">2. What is GitHub? &bull; Cloud Platform #2</span>
+      </div>
+      <div class="quiz-question">Can you use Git without having a GitHub account?</div>
+      <div class="quiz-options-list">
+        
+          <div class="quiz-opt ">
+            <strong>A.</strong> No, Git requires a verified GitHub username and token to function
+            
+          </div>
+        
+          <div class="quiz-opt correct">
+            <strong>B.</strong> Yes! Git is completely standalone and can be used 100% offline without GitHub
+             <em>(Correct ✓)</em>
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>C.</strong> Only on Linux operating systems
+            
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>D.</strong> Yes, but only for up to 30 days before licensing expires
+            
+          </div>
+        
+      </div>
+      <div class="quiz-explanation">
+        <strong>💡 Key Conceptual Takeaway:</strong> Yes! Git is an independent open-source tool created in 2005. GitHub came along in 2008 as a cloud platform to host Git repositories. You can use Git entirely on its own!
+      </div>
+    </div>
+  
+    <div class="quiz-card no-break">
+      <div class="quiz-header">
+        <span class="quiz-badge">Question 4 of 6</span>
+        <span class="quiz-topic">3. Git vs. GitHub (The Difference) &bull; The Great Comparison</span>
+      </div>
+      <div class="quiz-question">Which of the following statements is 100% TRUE?</div>
+      <div class="quiz-options-list">
+        
+          <div class="quiz-opt ">
+            <strong>A.</strong> Running "git commit" automatically uploads your code to GitHub.com
+            
+          </div>
+        
+          <div class="quiz-opt correct">
+            <strong>B.</strong> You can have Git installed on your laptop without ever creating a GitHub account
+             <em>(Correct ✓)</em>
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>C.</strong> Git was invented by Microsoft when they bought GitHub in 2018
+            
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>D.</strong> GitHub cannot host projects unless they are written in JavaScript
+            
+          </div>
+        
+      </div>
+      <div class="quiz-explanation">
+        <strong>💡 Key Conceptual Takeaway:</strong> Spot on! Git is an open-source tool you can use offline forever without a GitHub account. `git commit` only saves locally; you must run `git push` to upload to GitHub.
+      </div>
+    </div>
+  
+    <div class="quiz-card no-break">
+      <div class="quiz-header">
+        <span class="quiz-badge">Question 5 of 6</span>
+        <span class="quiz-topic">4. Essential Vocabulary &bull; Essential Vocabulary</span>
+      </div>
+      <div class="quiz-question">Which command do you use to download updates to an existing project on your laptop?</div>
+      <div class="quiz-options-list">
+        
+          <div class="quiz-opt ">
+            <strong>A.</strong> git clone
+            
+          </div>
+        
+          <div class="quiz-opt correct">
+            <strong>B.</strong> git pull
+             <em>(Correct ✓)</em>
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>C.</strong> git fork
+            
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>D.</strong> git push
+            
+          </div>
+        
+      </div>
+      <div class="quiz-explanation">
+        <strong>💡 Key Conceptual Takeaway:</strong> Use `git pull`! `git clone` is only used once to download a project initially. For everyday updates, `git pull` pulls down the newest commits.
+      </div>
+    </div>
+  
+    <div class="quiz-card no-break">
+      <div class="quiz-header">
+        <span class="quiz-badge">Question 6 of 6</span>
+        <span class="quiz-topic">Passing The Torch! 🎤 &bull; Grand Finale &amp; Handoff</span>
+      </div>
+      <div class="quiz-question">Which of the following describes the most professional Git workflow?</div>
+      <div class="quiz-options-list">
+        
+          <div class="quiz-opt ">
+            <strong>A.</strong> Commit everything directly to main at 3:00 AM without testing
+            
+          </div>
+        
+          <div class="quiz-opt correct">
+            <strong>B.</strong> Create a feature branch, make atomic commits, test, push, and open a Pull Request
+             <em>(Correct ✓)</em>
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>C.</strong> Email zip files to your team lead and let them merge files manually
+            
+          </div>
+        
+          <div class="quiz-opt ">
+            <strong>D.</strong> Delete the .git folder whenever something breaks and start fresh
+            
+          </div>
+        
+      </div>
+      <div class="quiz-explanation">
+        <strong>💡 Key Conceptual Takeaway:</strong> Feature branches + atomic commits + Pull Requests are the universal gold standard in modern professional software engineering worldwide!
+      </div>
+    </div>
+  
+
+  <!-- ================= AUDIENCE Q&A ================= -->
+  <div class="page-break"></div>
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2>Appendix: Audience Q&amp;A Cheat Sheet</h2>
+      <p>The Top 6 Real-World Questions Asked by Student Developers</p>
+    </div>
+    <span class="slide-badge-pill">Master Cheat Sheet</span>
+  </div>
+
+  
+    <div class="qa-box no-break">
+      <div class="qa-q">1. What happens if I accidentally commit my password or secret API key?</div>
+      <div class="qa-a"><strong>Answer:</strong> Git stores every past commit forever! Deleting the key in a new commit is NOT enough because anyone can inspect past commits in your git log. You must:<br/>
+    1. Immediately revoke and regenerate the API key online in your service dashboard.<br/>
+    2. Add <code>.env</code> and config files containing secrets to your <code>.gitignore</code> file.<br/>
+    3. Use tools like <code>git filter-repo</code> or BFG Repo-Cleaner to scrub the secret from all past commit history.</div>
+    </div>
+  
+    <div class="qa-box no-break">
+      <div class="qa-q">2. How do I fix a merge conflict if my code clashes with my partner?</div>
+      <div class="qa-a"><strong>Answer:</strong> Don't panic! A merge conflict just means you and your teammate edited the exact same line of code. Git pauses and writes conflict markers:<br/>
+    <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> (your local code), <code>=======</code>, and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; partner-branch</code>.<br/>
+    Open the file in VS Code, choose which version to accept (or combine both), save the file, run <code>git add .</code>, and finish with <code>git commit</code>. Member 2 demonstrates this in live action!</div>
+    </div>
+  
+    <div class="qa-box no-break">
+      <div class="qa-q">3. Is Git completely free? Does GitHub cost anything for students?</div>
+      <div class="qa-a"><strong>Answer:</strong> Git is 100% free and open-source under the GNU General Public License v2. GitHub is completely free for unlimited public and private repositories. Plus, as enrolled students, you qualify for the <strong>GitHub Student Developer Pack</strong> which unlocks free GitHub Copilot, domains, cloud credits, and over $200k+ in professional engineering tools!</div>
+    </div>
+  
+    <div class="qa-box no-break">
+      <div class="qa-q">4. Should I use the Terminal (CLI) or a GUI like GitHub Desktop / VS Code?</div>
+      <div class="qa-a"><strong>Answer:</strong> Start with the CLI (Terminal)! Practicing fundamental commands builds the true mental model of Git's 3 states. Once you grasp the underlying engine, visual tools in VS Code or GitHub Desktop become helpful accelerators rather than confusing black boxes.</div>
+    </div>
+  
+    <div class="qa-box no-break">
+      <div class="qa-q">5. What is the difference between "git fetch" and "git pull"?</div>
+      <div class="qa-a"><strong>Answer:</strong> <code>git fetch</code> downloads new commits and branches from GitHub into your local repository without modifying your working files (safe inspection). <code>git pull</code> runs both <code>git fetch</code> AND <code>git merge</code> automatically in a single step, updating your active branch immediately.</div>
+    </div>
+  
+    <div class="qa-box no-break">
+      <div class="qa-q">6. Why do some people say "master" branch and others say "main"?</div>
+      <div class="qa-a"><strong>Answer:</strong> Prior to October 2020, Git's default initial branch name was called <code>master</code>. In 2020, GitHub and the global open-source community transitioned to <code>main</code> as the standard default branch name for clarity and modern conventions. Both operate identically in the Git engine.</div>
+    </div>
+  
+
+  <div class="pro-tip-banner no-break" style="margin-top: 20px;">
+    <strong>🎉 End of Member 1 Presentation Handbook:</strong>
+    <p>You now possess the complete theoretical and practical fundamentals of Git and GitHub. Keep this handbook as your reference guide throughout your student software engineering journey!</p>
+  </div>
+
+</body>
+</html>
